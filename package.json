@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@shopify/polaris": "^1.8.3",
     "axios": "^0.17.1",
     "lodash": "^4.17.4",
     "re-base": "^3.2.0",
