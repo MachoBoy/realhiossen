@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
-import Header from './Header';
-import SideMenu from './SideMenu';
+import Dashboard from './Dashboard';
 
 class Main extends Component {
   render() {
     return (
-      <div>
-        <Header />
-        <SideMenu />
+      <div className="mainContainer" style={styles.mainStyle}>
+        <Dashboard />
       </div>
     );
   }
 }
 
+const styles = {
+  mainStyle: {
+    width: '79%',
+    float: 'right'
+  }
+};
 export default Main;

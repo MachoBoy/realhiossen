@@ -1,11 +1,12 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import { Menu, Icon } from 'semantic-ui-react';
 
 const MENU_ITEM = [
-  { title: 'Account', icon: 'user circle' },
-  { title: 'Order', icon: 'shipping' },
-  { title: 'Contact', icon: 'address book' }
+  { title: 'Account', icon: 'user circle', to: '/account' },
+  { title: 'Order', icon: 'shipping', to: '/order' },
+  { title: 'Contact', icon: 'address book', to: '/contact' }
 ];
 
 class SideMenu extends Component {
@@ -15,12 +16,23 @@ class SideMenu extends Component {
       activeIndex: 0
     };
     this.renderMenu = this.renderMenu.bind(this);
+    this.handleMenuOnClick = this.handleMenuOnClick.bind(this);
+  }
+
+  handleMenuOnClick(index) {
+    this.setState({ activeIndex: index });
   }
 
   renderMenu() {
-    return _.map(MENU_ITEM, ({ title, icon }) => {
+    return _.map(MENU_ITEM, ({ title, icon, to }, index) => {
       return (
-        <Menu.Item>
+        <Menu.Item
+          key={title}
+          as={NavLink}
+          to={to}
+          active={this.state.activeIndex === index}
+          onClick={() => this.handleMenuOnClick(index)}
+        >
           <Icon name={icon} size="large" />
           {title}
         </Menu.Item>
@@ -41,7 +53,9 @@ class SideMenu extends Component {
 
 const styles = {
   menuStyle: {
-    width: '17%'
+    float: 'left',
+    postion: 'fixed',
+    width: '20%'
   }
 };
 

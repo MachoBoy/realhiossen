@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Segment, Button, Image, Modal } from 'semantic-ui-react';
 import LoginPage from './LoginPage';
 import { logoutUser } from '../actions';
 
 class Header extends Component {
   render() {
+    console.log(this.props.registration);
     return (
       <div className="headerContainer" style={styles.headerSytle}>
         <Segment>
           <Image
+            as={Link}
+            to="/"
             style={styles.imageStyle}
             src={require('../img/hiossenLogo.jpg')}
           />
@@ -30,7 +34,6 @@ class Header extends Component {
                   Log In
                 </Button>
               }
-              closeIcon
             >
               <Modal.Content>
                 <LoginPage />
@@ -63,7 +66,8 @@ const styles = {
 const mapStateToProps = state => {
   return {
     authenticated: state.auth.authenticated,
-    message: state.auth.message
+    message: state.auth.message,
+    registration: state.auth.registration
   };
 };
 
