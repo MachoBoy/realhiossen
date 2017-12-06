@@ -1,3 +1,6 @@
+export const REGISTRATION = 'registration';
+export const REGISTER_USER = 'register_user';
+export const REGISTER_FAIL = 'register_fail';
 export const LOGIN_USER = 'login_user';
 export const LOGIN_USER_FAIL = 'login_user_fail';
 export const LOGIN_USER_SUCCESS = 'login_user_success';
