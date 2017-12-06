@@ -6,6 +6,7 @@ import {
 
 const INITIAL_STATE = {
   authenticated: false,
+  authFail: false,
   message: ''
 };
 
@@ -18,7 +19,8 @@ export default function(state = INITIAL_STATE, action) {
     case LOGIN_USER_FAIL:
       return {
         ...state,
-        message: 'Invalid Email or password. Please try again'
+        authFail: true,
+        message: 'Invalid Email or password.   Please try again'
       };
     default:
       return state;

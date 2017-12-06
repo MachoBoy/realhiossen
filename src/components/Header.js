@@ -14,6 +14,7 @@ class Header extends Component {
             src={require('../img/hiossenLogo.jpg')}
           />
 
+          <Button style={{ float: 'right' }}> 쇼핑카트 </Button>
           {this.props.authenticated ? (
             <Button
               primary

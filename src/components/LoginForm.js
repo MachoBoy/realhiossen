@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   Button,
   Form,
@@ -19,6 +20,7 @@ class LoginForm extends Component {
     };
     this.handleOnChange = this.handleOnChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.handleRegister = this.handleRegister.bind(this);
   }
 
   handleOnChange(name, e) {
@@ -29,6 +31,11 @@ class LoginForm extends Component {
     e.preventDefault();
     const { email, password } = this.state;
     this.props.loginUser({ email, password });
+  }
+
+  handleRegister() {
+    return <Redirect to="register" />;
+    console.log('register');
   }
 
   render() {
@@ -43,10 +50,16 @@ class LoginForm extends Component {
               src={require('../img/hiossenLogo.jpg')}
               style={styles.headerImgStyle}
             />
+            {this.props.authFail ? (
+              <Message negative>
+                <Icon name="warning circle" size="large" />
+                {this.props.message}
+              </Message>
+            ) : null}
             <Form.Input
               fluid
               placeholder="Email"
-              icon="user"
+              icon="mail"
               iconPosition="left"
               value={this.state.email}
               onChange={e => this.handleOnChange('email', e)}
@@ -65,7 +78,11 @@ class LoginForm extends Component {
                 Login
               </Button>
 
-              <Button secondary style={{ float: 'right' }}>
+              <Button
+                secondary
+                style={{ float: 'right' }}
+                onClick={this.handleRegister}
+              >
                 Register
               </Button>
             </div>
@@ -92,4 +109,11 @@ const styles = {
   }
 };
 
-export default LoginForm;
+const mapStateToProps = state => {
+  return {
+    authFail: state.auth.authFail,
+    message: state.auth.message
+  };
+};
+
+export default connect(mapStateToProps)(LoginForm);

@@ -31,10 +31,18 @@ class SideMenu extends Component {
   render() {
     return (
       <div>
-        <Menu vertical>{this.renderMenu()}</Menu>
+        <Menu vertical style={styles.menuStyle}>
+          {this.renderMenu()}
+        </Menu>
       </div>
     );
   }
 }
+
+const styles = {
+  menuStyle: {
+    width: '17%'
+  }
+};
 
 export default SideMenu;
