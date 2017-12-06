@@ -13,8 +13,6 @@ firebase.initializeApp(config);
 
 //store data
 export const database = firebase.database().ref('posts/');
-
-export const provider = new firebase.auth.GoogleAuthProvider();
 export const auth = firebase.auth();
 
 export default config;

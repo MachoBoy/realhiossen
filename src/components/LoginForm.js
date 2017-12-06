@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  Button,
-  Form,
-  Segment,
-  Message,
-  Icon,
-  Image,
-  Divider
-} from 'semantic-ui-react';
-import { Redirect } from 'react-router-dom';
+import { Button, Form, Segment, Message, Icon, Image } from 'semantic-ui-react';
+import { Redirect, Link } from 'react-router-dom';
+import { registration } from '../actions';
 
 class LoginForm extends Component {
   constructor(props) {
@@ -35,12 +28,11 @@ class LoginForm extends Component {
 
   handleRegister() {
     return <Redirect to="register" />;
-    console.log('register');
   }
 
   render() {
     if (this.props.redirect) {
-      return <Redirect to="/main" />;
+      return <Redirect to="/" />;
     }
     return (
       <div className="LoginForm" style={styles.loginFormStyle}>
@@ -66,7 +58,7 @@ class LoginForm extends Component {
             />
             <Form.Input
               fluid
-              placeholder="password"
+              placeholder="Password"
               icon="lock"
               iconPosition="left"
               type="password"
@@ -78,13 +70,15 @@ class LoginForm extends Component {
                 Login
               </Button>
 
-              <Button
-                secondary
-                style={{ float: 'right' }}
-                onClick={this.handleRegister}
-              >
-                Register
-              </Button>
+              <Link to="/register">
+                <Button
+                  secondary
+                  style={{ float: 'right' }}
+                  onClick={() => this.props.registration()}
+                >
+                  Register
+                </Button>
+              </Link>
             </div>
           </Segment>
         </Form>
@@ -116,4 +110,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(LoginForm);
+export default connect(mapStateToProps, { registration })(LoginForm);
