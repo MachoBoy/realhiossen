@@ -1,3 +1,4 @@
+export const GET_USER = 'get_user';
 export const REGISTRATION = 'registration';
 export const REGISTER_USER = 'register_user';
 export const REGISTER_FAIL = 'register_fail';

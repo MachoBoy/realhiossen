@@ -1,6 +1,7 @@
-import { auth } from '../firebase/firebase';
+import { auth, database } from '../firebase/firebase';
 
 import {
+  GET_USER,
   REGISTRATION,
   REGISTER_USER,
   REGISTER_FAIL,
@@ -16,6 +17,7 @@ export const registration = () => {
   };
 };
 
+// get current user
 export const getUser = () => {
   return dispatch => {
     auth.onAuthStateChanged(user => {
