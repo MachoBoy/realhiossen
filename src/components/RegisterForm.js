@@ -44,9 +44,9 @@ class RegisterForm extends Component {
                 {this.props.message}
               </Message>
             ) : null}
-            {/* <Form.Input label="Customer Code" placeholder="Customer Code" />
-            <Form.Input label="First name" placeholder="First name" />
-            <Form.Input label="Last name" placeholder="Last name" /> */}
+            <Form.Input label="Customer Code*" placeholder="Customer Code" />
+            <Form.Input label="First name*" placeholder="First name" />
+            <Form.Input label="Last name*" placeholder="Last name" />
             <Form.Input
               label="Email*"
               placeholder="Email"
