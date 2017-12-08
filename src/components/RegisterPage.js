@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Image } from 'semantic-ui-react';
 import RegisterForm from './RegisterForm';
 import { registerUser } from '../actions';
 
@@ -7,9 +8,13 @@ class RegisterPage extends Component {
   render() {
     const { registerUser, registerFail, message, authenticated } = this.props;
     return (
-      <div className="registerPage" style={{ background: 'red' }}>
+      <div className="registerPage" style={{ background: '#393B51' }}>
         <div className="registerLogo" style={styles.registerFormStyle}>
-          <h1>Need to apply companyLogo, Slogan, Background</h1>
+          <Image
+            src={require('../img/hiossenLogo.jpg')}
+            style={styles.logoStyle}
+            label="The solutions you need in just one place"
+          />
         </div>
         <RegisterForm
           registerUser={registerUser}
@@ -24,7 +29,8 @@ class RegisterPage extends Component {
 
 const styles = {
   registerFormStyle: {
-    background: 'green',
+    paddingTop: '35px',
+    background: 'white',
     width: '100%',
     height: '100%',
     position: 'absolute',
@@ -33,6 +39,11 @@ const styles = {
     left: '0',
     right: '0',
     margin: 'auto'
+  },
+  logoStyle: {
+    width: '30%',
+    display: 'block',
+    margin: '0 auto'
   }
 };
 

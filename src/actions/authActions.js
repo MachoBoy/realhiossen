@@ -1,4 +1,4 @@
-import { auth, database } from '../firebase/firebase';
+import { auth } from '../firebase/firebase';
 
 import {
   GET_USER,

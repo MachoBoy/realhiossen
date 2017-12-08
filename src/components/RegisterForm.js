@@ -2,14 +2,6 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Form, Message, Button, Icon } from 'semantic-ui-react';
 
-// {/*       customer code
-//           First Name
-//           Last Name
-//           Email address
-//           password
-//           address
-//           contact number */}
-
 class RegisterForm extends Component {
   constructor(props) {
     super(props);
@@ -44,9 +36,7 @@ class RegisterForm extends Component {
                 {this.props.message}
               </Message>
             ) : null}
-            <Form.Input label="Customer Code*" placeholder="Customer Code" />
-            <Form.Input label="First name*" placeholder="First name" />
-            <Form.Input label="Last name*" placeholder="Last name" />
+
             <Form.Input
               label="Email*"
               placeholder="Email"
@@ -58,12 +48,9 @@ class RegisterForm extends Component {
               type="password"
               onChange={e => this.handleOnChange('password', e)}
             />
-
-            {/* <Form.Input label="Address" placeholder="Address" />
-          <Form.Input label="Contact Number" placeholder="Contact Number" /> */}
             <div className="submitButton" style={styles.registerButtonStyle}>
               <Button primary onClick={this.handleRegister}>
-                Submit
+                Register
               </Button>
             </div>
           </Form>
@@ -75,9 +62,9 @@ class RegisterForm extends Component {
 
 const styles = {
   registerFormStyle: {
-    background: '#e5e5e5',
+    background: '#c8cfd9',
     width: '30%',
-    height: '85%',
+    height: '45%',
     borderRadius: '15px',
     position: 'absolute',
     top: '0',

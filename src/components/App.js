@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Main from './Main';
 import RegisterPage from './RegisterPage';
 import AccountPage from './AccountPage';
 import Header from './Header';
 import SideMenu from './SideMenu';
+import { getUser } from '../actions';
 
 class App extends Component {
+  componentWillMount() {
+    this.props.getUser();
+  }
+
   render() {
     const Order = () => <div>order page</div>;
     const Contact = () => <div>Contact page</div>;
@@ -28,4 +34,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(null, { getUser })(App);

@@ -8,6 +8,7 @@ import {
 } from '../actions/types';
 
 const INITIAL_STATE = {
+  user: null,
   registration: false,
   authenticated: false,
   registerFail: false,
@@ -21,7 +22,7 @@ export default function(state = INITIAL_STATE, action) {
     case REGISTRATION:
       return { ...state, registration: true };
     case LOGIN_USER_SUCCESS:
-      return { ...state, authenticated: true };
+      return { ...state, authenticated: true, user: action.payload };
     case LOGOUT_USER:
       return { ...state, authenticated: false };
     case LOGIN_USER_FAIL:
@@ -34,7 +35,7 @@ export default function(state = INITIAL_STATE, action) {
       return {
         ...state,
         registerFail: true,
-        message: 'Email are alreay exist'
+        message: 'Registration Failed'
       };
     default:
       return state;

@@ -7,7 +7,7 @@ import { logoutUser } from '../actions';
 
 class Header extends Component {
   render() {
-    console.log(this.props.registration);
+    console.log(this.props.user);
     return (
       <div className="headerContainer" style={styles.headerSytle}>
         <Segment>
@@ -67,7 +67,8 @@ const mapStateToProps = state => {
   return {
     authenticated: state.auth.authenticated,
     message: state.auth.message,
-    registration: state.auth.registration
+    registration: state.auth.registration,
+    user: state.auth.user
   };
 };
 

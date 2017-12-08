@@ -12,7 +12,7 @@ const config = {
 firebase.initializeApp(config);
 
 //store data
-export const database = firebase.database().ref('posts/');
+export const database = firebase.database();
 export const auth = firebase.auth();
 
 export default config;
