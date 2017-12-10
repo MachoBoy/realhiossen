@@ -21,7 +21,7 @@ class ProfileForm extends Component {
   }
 
   componentWillMount() {
-    //this.props.fetchUserProfile();
+    this.props.fetchUserProfile();
   }
 
   // submit the profile data
