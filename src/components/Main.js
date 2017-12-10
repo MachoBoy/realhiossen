@@ -4,17 +4,11 @@ import Dashboard from './Dashboard';
 class Main extends Component {
   render() {
     return (
-      <div className="mainContainer" style={styles.mainStyle}>
+      <div className="mainContainer">
         <Dashboard />
       </div>
     );
   }
 }
 
-const styles = {
-  mainStyle: {
-    width: '79%',
-    float: 'right'
-  }
-};
 export default Main;

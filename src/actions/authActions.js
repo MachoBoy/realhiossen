@@ -2,7 +2,6 @@ import { auth } from '../firebase/firebase';
 
 import {
   GET_USER,
-  REGISTRATION,
   REGISTER_USER,
   REGISTER_FAIL,
   LOGIN_USER,
@@ -11,18 +10,12 @@ import {
   LOGOUT_USER
 } from './types';
 
-export const registration = () => {
-  return {
-    type: REGISTRATION
-  };
-};
-
 // get current user
 export const getUser = () => {
   return dispatch => {
     auth.onAuthStateChanged(user => {
       dispatch({
-        type: 'GET_USER',
+        type: GET_USER,
         payload: user
       });
     });
@@ -36,9 +29,7 @@ export const registerUser = ({ email, password }) => {
     auth
       .createUserWithEmailAndPassword(email, password)
       .then(user => loginUserSuccess(dispatch, user))
-      .catch(() => {
-        registerFail(dispatch);
-      });
+      .catch(() => registerFail(dispatch));
   };
 };
 
@@ -50,7 +41,6 @@ export const loginUser = ({ email, password }) => {
       .signInWithEmailAndPassword(email, password)
       .then(user => loginUserSuccess(dispatch, user))
       .catch(error => {
-        console.log(error);
         loginUserFail(dispatch);
       });
   };
@@ -60,7 +50,10 @@ export const loginUser = ({ email, password }) => {
 export const logoutUser = () => {
   return dispatch => {
     dispatch({ type: LOGOUT_USER });
-    auth.signOut();
+    auth
+      .signOut()
+      .then(() => console.log('logout'))
+      .catch(error => console.error(error));
   };
 };
 

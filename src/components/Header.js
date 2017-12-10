@@ -3,39 +3,43 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Segment, Button, Image, Modal } from 'semantic-ui-react';
 import LoginPage from './LoginPage';
+import SideMenu from './SideMenu';
 import { logoutUser } from '../actions';
 
 class Header extends Component {
   render() {
-    console.log(this.props.user);
     return (
-      <div className="headerContainer" style={styles.headerSytle}>
+      <div className="headerContainer">
         <Segment>
-          <Image
-            as={Link}
-            to="/"
-            style={styles.imageStyle}
-            src={require('../img/hiossenLogo.jpg')}
-          />
+          <div className="logo" style={styles.imageStyle}>
+            <Image as={Link} to="/" src={require('../img/hiossenLogo.jpg')} />
+          </div>
+          {this.props.user ? (
+            <div className="menuContainer" style={styles.menuContainer}>
+              <SideMenu />
+            </div>
+          ) : (
+            <div className="menuContainer" style={styles.menuContainerHidden}>
+              <SideMenu />
+            </div>
+          )}
 
-          <Button style={{ float: 'right' }}> 쇼핑카트 </Button>
           {this.props.authenticated ? (
-            <Button
-              primary
-              style={styles.buttonStyle}
-              onClick={this.props.logoutUser}
-            >
-              Sign out
-            </Button>
+            <div style={styles.buttonStyle}>
+              <Button color="red" onClick={this.props.logoutUser}>
+                Sign out
+              </Button>
+            </div>
           ) : (
             <Modal
+              size="tiny"
               trigger={
-                <Button primary style={styles.buttonStyle}>
-                  Log In
-                </Button>
+                <div style={styles.buttonStyle}>
+                  <Button primary>Log In</Button>
+                </div>
               }
             >
-              <Modal.Content>
+              <Modal.Content style={{ padding: '0' }}>
                 <LoginPage />
               </Modal.Content>
             </Modal>
@@ -47,19 +51,26 @@ class Header extends Component {
 }
 
 const styles = {
-  headerSytle: {
-    background: 'red',
-    height: '67px'
-  },
   imageStyle: {
-    display: 'inline-block',
-    paddingLeft: '30px',
+    marginLeft: '30px',
+    marginBottom: '15px',
     width: '150px',
-    margin: '0'
+    float: 'left',
+    display: 'inline-block',
+    marginRight: '48%'
   },
+  menuContainer: {
+    display: 'inline-block',
+    marginRight: '5%'
+  },
+  menuContainerHidden: {
+    display: 'inline-block',
+    visibility: 'hidden',
+    marginRight: '5%'
+  },
+
   buttonStyle: {
-    float: 'right',
-    marginRight: '50px'
+    display: 'inline-block'
   }
 };
 
@@ -68,7 +79,8 @@ const mapStateToProps = state => {
     authenticated: state.auth.authenticated,
     message: state.auth.message,
     registration: state.auth.registration,
-    user: state.auth.user
+    user: state.auth.user,
+    loading: state.auth.loading
   };
 };
 

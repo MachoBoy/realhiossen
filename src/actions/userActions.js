@@ -2,33 +2,28 @@ import { auth, database } from '../firebase/firebase';
 
 import {
   UPDATE_USER_PROFILE,
-  PROFILE_ON_CHANGE,
-  USER_PROFILE_FETCH_SUCCESS
+  UPDATE_SUCCESS,
+  INPUT_ON_CHANGE,
+  USER_PROFILE_FETCH_SUCCESS,
+  UPDATE_SHIPPING_ADDRESS
 } from './types';
 
-export const profileOnChange = ({ prop, userInput }) => {
+export const inputOnChange = data => {
   return {
-    type: PROFILE_ON_CHANGE,
-    payload: { prop, userInput }
+    type: INPUT_ON_CHANGE,
+    payload: data
   };
 };
 
-export const updateUserProfile = ({
-  customerCode,
-  firstName,
-  lastName,
-  email,
-  phone,
-  address,
-  uid
-}) => {
+export const updateUserProfile = ({ firstName, lastName, phone }) => {
   const { currentUser } = auth;
   return dispatch => {
+    dispatch({ type: UPDATE_USER_PROFILE });
     database
       .ref(`users/${currentUser.uid}/profile`)
-      .set({ customerCode, firstName, lastName, email, phone, address })
+      .set({ firstName, lastName, phone })
       .then(() => {
-        dispatch({ type: UPDATE_USER_PROFILE });
+        dispatch({ type: UPDATE_SUCCESS });
       });
   };
 };
@@ -36,8 +31,32 @@ export const updateUserProfile = ({
 export const fetchUserProfile = () => {
   const { currentUser } = auth;
   return dispatch => {
-    database.ref(`users/${currentUser.uid}/profile`).on('value', snapshot => {
+    database.ref(`users/${currentUser.uid}/profile`).once('value', snapshot => {
       dispatch({ type: USER_PROFILE_FETCH_SUCCESS, payload: snapshot.val() });
     });
+  };
+};
+
+export const updateShippingAddress = ({
+  shippingAddress,
+  city,
+  state,
+  postalCode,
+  shippingPhone
+}) => {
+  const { currentUser } = auth;
+  return dispatch => {
+    database
+      .ref(`users/${currentUser.uid}/shippingAddress`)
+      .push({
+        shippingAddress,
+        city,
+        state,
+        postalCode,
+        shippingPhone
+      })
+      .then(() => {
+        dispatch({ type: UPDATE_SHIPPING_ADDRESS });
+      });
   };
 };
