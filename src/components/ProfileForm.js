@@ -52,7 +52,7 @@ class ProfileForm extends Component {
   render() {
     return (
       <div className="accountForm">
-        <Segment>
+        <Segment raised style={{ paddingLeft: '30px' }}>
           <Header as="h2" icon>
             Account Profile Details
             <Header.Subheader />
@@ -68,13 +68,16 @@ class ProfileForm extends Component {
               </Button>
             )}
           </div>
-          <Message
-            compact
-            icon="checkmark"
-            success
-            header="Saved"
-            content="Your fields were saved "
-          />
+          {this.props.profileSaved ? (
+            <Message
+              compact
+              icon="checkmark"
+              success
+              header="Saved"
+              content="Your fields were saved "
+            />
+          ) : null}
+
           <Form loading={this.props.asyncLoading} size="large">
             <Form.Input
               width={3}
@@ -127,9 +130,9 @@ const mapStateToProps = state => {
     firstName: state.user.firstName,
     lastName: state.user.lastName,
     phone: state.user.phone,
-    address: state.user.address,
     userInfo: state.user,
-    asyncLoading: state.user.loading
+    asyncLoading: state.user.loading,
+    profileSaved: state.user.profileSaved
   };
 };
 

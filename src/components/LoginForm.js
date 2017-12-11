@@ -31,7 +31,6 @@ class LoginForm extends Component {
   }
 
   render() {
-    console.log(this.props.registerUser);
     if (this.props.redirect) {
       return <Redirect to="/" />;
     }
@@ -73,7 +72,7 @@ class LoginForm extends Component {
             onChange={e => this.handleOnChange('password', e)}
           />
           <div className="submitButton" style={styles.buttonStyle}>
-            <Button style={{ width: '80%' }} primary onClick={this.handleLogin}>
+            <Button style={{ width: '70%' }} primary onClick={this.handleLogin}>
               Login
             </Button>
 

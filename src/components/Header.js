@@ -14,7 +14,7 @@ class Header extends Component {
           <div className="logo" style={styles.imageStyle}>
             <Image as={Link} to="/" src={require('../img/hiossenLogo.jpg')} />
           </div>
-          {this.props.user ? (
+          {this.props.authenticated ? (
             <div className="menuContainer" style={styles.menuContainer}>
               <SideMenu />
             </div>

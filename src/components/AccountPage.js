@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Segment, Icon, Header } from 'semantic-ui-react';
 import ProfileForm from './ProfileForm';
 import ShippingForm from './ShippingForm';
+import AddressBook from './AddressBook';
 
 class AccountPage extends Component {
   render() {
@@ -16,11 +17,34 @@ class AccountPage extends Component {
             </Header.Subheader>
           </Header>
         </Segment>
-        <ProfileForm />
-        <ShippingForm />
+        <div className="profileContents" style={styles.profileContentsStyle}>
+          <div
+            className="addressBookContainer"
+            style={styles.addressBookContainerStyle}
+          >
+            <AddressBook />
+          </div>
+          <div style={{ marginBottom: '15px', width: '60%' }}>
+            <ProfileForm />
+          </div>
+
+          <div style={{ width: '60%' }}>
+            <ShippingForm />
+          </div>
+        </div>
       </div>
     );
   }
 }
+
+const styles = {
+  profileContentsStyle: {
+    position: 'relative'
+  },
+  addressBookContainerStyle: {
+    width: '39%',
+    float: 'right'
+  }
+};
 
 export default AccountPage;

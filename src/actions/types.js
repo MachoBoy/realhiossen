@@ -11,4 +11,5 @@ export const INPUT_ON_CHANGE = 'input_on_change';
 export const USER_PROFILE_FETCH_SUCCESS = 'user_profile_fetch_success';
 export const UPDATE_SUCCESS = 'update_success';
 
-export const UPDATE_SHIPPING_ADDRESS = 'update_shipping_address';
+export const ADD_SHIPPING_ADDRESS = 'add_shipping_address';
+export const ADD_SHIPIING_ADDRESS_SUCCESS = 'add_shipping_address_success';

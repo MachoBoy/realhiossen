@@ -4,6 +4,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Main from './Main';
 import AccountPage from './AccountPage';
 import Header from './Header';
+import SideMenu from './SideMenu';
 import { getUser } from '../actions';
 
 class App extends Component {
@@ -12,6 +13,12 @@ class App extends Component {
   }
 
   render() {
+    const { user } = this.props;
+    if (user) {
+      console.log('user logged in');
+    } else {
+      console.log('user is not there');
+    }
     const Order = () => <div>order page</div>;
     const Contact = () => <div>Contact page</div>;
     return (
@@ -30,10 +37,11 @@ class App extends Component {
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     user: state.auth.user
-//   };
-// };
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user,
+    authenticated: state.auth.authenticated
+  };
+};
 
 export default connect(null, { getUser })(App);

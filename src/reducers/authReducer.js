@@ -27,7 +27,6 @@ export default function(state = INITIAL_STATE, action) {
       return {
         ...state,
         authenticated: true,
-        //user: action.payload,
         loading: false,
         authFail: false
       };

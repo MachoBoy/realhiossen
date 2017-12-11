@@ -21,7 +21,10 @@ class ShippingForm extends Component {
   submitForm(e) {
     e.preventDefault();
     const {
+      shippingFirstName,
+      shippingLastName,
       shippingAddress,
+      companyName,
       city,
       state,
       postalCode,
@@ -29,7 +32,10 @@ class ShippingForm extends Component {
     } = this.props;
 
     this.props.updateShippingAddress({
+      shippingFirstName,
+      shippingLastName,
       shippingAddress,
+      companyName,
       city,
       state,
       postalCode,
@@ -38,20 +44,30 @@ class ShippingForm extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div className="shippingForm">
-        <Segment color="red">
+        <Segment raised style={{ paddingLeft: '30px' }}>
           <Header as="h2" icon>
-            Shipping Address
+            Add Shipping Address
             <Header.Subheader />
           </Header>
+          <div style={{ float: 'right' }}>
+            <Button
+              color="green"
+              style={{ float: 'right' }}
+              onClick={this.submitForm}
+            >
+              Save
+            </Button>
+          </div>
           <Form size="large">
             <Form.Group>
               <Form.Input
                 width={6}
                 name="firstName"
                 label="Fisrt Name"
-                value={this.props.firstName}
+                value={this.props.shippingFirstName}
                 onChange={this.handleOnChange.bind(this)}
               />
 
@@ -59,7 +75,7 @@ class ShippingForm extends Component {
                 width={6}
                 name="lastName"
                 label="Last Name"
-                value={this.props.lastName}
+                value={this.props.shippingLastName}
                 onChange={this.handleOnChange.bind(this)}
               />
             </Form.Group>
@@ -68,7 +84,7 @@ class ShippingForm extends Component {
                 width={6}
                 name="compnayName"
                 label="Company Name"
-                value={this.props.lastName}
+                value={this.props.companyName}
                 onChange={this.handleOnChange.bind(this)}
               />
               <Form.Input
@@ -110,9 +126,6 @@ class ShippingForm extends Component {
                 onChange={this.handleOnChange.bind(this)}
               />
             </Form.Group>
-            <Button color="green" onClick={this.submitForm}>
-              Save
-            </Button>
           </Form>
         </Segment>
       </div>
@@ -122,11 +135,14 @@ class ShippingForm extends Component {
 
 const mapStateToProps = state => {
   return {
+    shippingFirstName: state.user.shippingFirstName,
+    shippingLastName: state.user.shippingLastName,
     shippingAddress: state.user.shippingAddress,
     city: state.user.city,
     state: state.user.state,
     postalCode: state.user.postalCode,
-    shippingPhone: state.user.shippingPhone
+    shippingPhone: state.user.shippingPhone,
+    companyName: state.user.companyName
   };
 };
 

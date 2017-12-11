@@ -2,23 +2,26 @@ import {
   UPDATE_USER_PROFILE,
   USER_PROFILE_FETCH_SUCCESS,
   INPUT_ON_CHANGE,
-  UPDATE_SHIPPING_ADDRESS,
-  UPDATE_SUCCESS
+  UPDATE_SUCCESS,
+  ADD_SHIPPING_ADDRESS,
+  ADD_SHIPIING_ADDRESS_SUCCESS
 } from '../actions/types';
 
 const INITIAL_STATE = {
   customerCode: '',
-  firstName: '',
-  lastName: '',
+  shippingFirstName: '',
+  shippingLastName: '',
   email: '',
   phone: '',
-  address: '',
   shippingAddress: '',
+  companyName: '',
   city: '',
   state: '',
   postalCode: '',
   shippingPhone: '',
-  loading: false
+  loading: false,
+  profileSaved: false,
+  shippingAddressSaved: false
 };
 
 export default function(state = INITIAL_STATE, action) {
@@ -33,12 +36,12 @@ export default function(state = INITIAL_STATE, action) {
       return { ...state, loading: true };
     case USER_PROFILE_FETCH_SUCCESS:
       return action.payload;
-    case UPDATE_SHIPPING_ADDRESS:
-      return {
-        ...state
-      };
+    case ADD_SHIPPING_ADDRESS:
+      return { ...state, loading: true };
+    case ADD_SHIPIING_ADDRESS_SUCCESS:
+      return { ...state, loading: false, shippingAddressSaved: true };
     case UPDATE_SUCCESS:
-      return { ...state, loading: false };
+      return { ...state, loading: false, profileSaved: true };
     default:
       return state;
   }
