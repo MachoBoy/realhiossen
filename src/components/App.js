@@ -4,7 +4,8 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Main from './Main';
 import AccountPage from './AccountPage';
 import Header from './Header';
-import SideMenu from './SideMenu';
+import OrderPage from './OrderPage';
+import ContactPage from './ContactPage';
 import { getUser } from '../actions';
 
 class App extends Component {
@@ -19,7 +20,7 @@ class App extends Component {
     } else {
       console.log('user is not there');
     }
-    const Order = () => <div>order page</div>;
+
     const Contact = () => <div>Contact page</div>;
     return (
       <div className="App">
@@ -28,8 +29,8 @@ class App extends Component {
             <Header />
             <Route exact path="/" component={Main} />
             <Route exact path="/account" component={AccountPage} />
-            <Route exact path="/order" component={Order} />
-            <Route exact path="/contact" component={Contact} />
+            <Route exact path="/order" component={OrderPage} />
+            <Route exact path="/contact" component={ContactPage} />
           </div>
         </BrowserRouter>
       </div>
@@ -44,4 +45,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(null, { getUser })(App);
+export default connect(mapStateToProps, { getUser })(App);

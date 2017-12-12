@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  Segment,
-  Icon,
-  Header,
-  Button,
-  Form,
-  Message
-} from 'semantic-ui-react';
+import { Segment, Header, Button, Form } from 'semantic-ui-react';
 import { updateUserProfile, inputOnChange, fetchUserProfile } from '../actions';
+import MessageBox from './common/messageBox';
 
 class ProfileForm extends Component {
   constructor(props) {
@@ -20,9 +14,9 @@ class ProfileForm extends Component {
     this.handleEdit = this.handleEdit.bind(this);
   }
 
-  componentWillMount() {
-    this.props.fetchUserProfile();
-  }
+  // componentDidMount() {
+  //   this.props.fetchUserProfile();
+  // }
 
   // submit the profile data
   handleOnSubmit(e) {
@@ -69,16 +63,16 @@ class ProfileForm extends Component {
             )}
           </div>
           {this.props.profileSaved ? (
-            <Message
-              compact
+            <MessageBox
+              compact={true}
               icon="checkmark"
-              success
+              success={true}
               header="Saved"
               content="Your fields were saved "
             />
           ) : null}
 
-          <Form loading={this.props.asyncLoading} size="large">
+          <Form size="large">
             <Form.Input
               width={3}
               name="customerCode"
@@ -122,8 +116,6 @@ class ProfileForm extends Component {
   }
 }
 
-const styles = {};
-
 const mapStateToProps = state => {
   return {
     customerCode: state.user.customerCode,
@@ -131,7 +123,6 @@ const mapStateToProps = state => {
     lastName: state.user.lastName,
     phone: state.user.phone,
     userInfo: state.user,
-    asyncLoading: state.user.loading,
     profileSaved: state.user.profileSaved
   };
 };

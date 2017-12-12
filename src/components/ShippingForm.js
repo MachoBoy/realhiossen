@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form, Button, Segment, Header } from 'semantic-ui-react';
 import { updateShippingAddress, inputOnChange } from '../actions';
+import MessageBox from './common/messageBox';
 
 // fields: Address, City, State, PostalCode, ShippingPhone
 
@@ -44,7 +45,6 @@ class ShippingForm extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div className="shippingForm">
         <Segment raised style={{ paddingLeft: '30px' }}>
@@ -61,11 +61,21 @@ class ShippingForm extends Component {
               Save
             </Button>
           </div>
+          {this.props.shippingAddressSaved ? (
+            <MessageBox
+              compact={true}
+              icon="checkmark"
+              success={true}
+              header="Saved"
+              content="Your fields were saved "
+            />
+          ) : null}
+
           <Form size="large">
             <Form.Group>
               <Form.Input
                 width={6}
-                name="firstName"
+                name="shippingFirstName"
                 label="Fisrt Name"
                 value={this.props.shippingFirstName}
                 onChange={this.handleOnChange.bind(this)}
@@ -73,7 +83,7 @@ class ShippingForm extends Component {
 
               <Form.Input
                 width={6}
-                name="lastName"
+                name="shippingLastName"
                 label="Last Name"
                 value={this.props.shippingLastName}
                 onChange={this.handleOnChange.bind(this)}
@@ -82,7 +92,7 @@ class ShippingForm extends Component {
             <Form.Group>
               <Form.Input
                 width={6}
-                name="compnayName"
+                name="companyName"
                 label="Company Name"
                 value={this.props.companyName}
                 onChange={this.handleOnChange.bind(this)}
@@ -142,7 +152,8 @@ const mapStateToProps = state => {
     state: state.user.state,
     postalCode: state.user.postalCode,
     shippingPhone: state.user.shippingPhone,
-    companyName: state.user.companyName
+    companyName: state.user.companyName,
+    shippingAddressSaved: state.user.shippingAddressSaved
   };
 };
 

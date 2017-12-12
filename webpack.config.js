@@ -10,7 +10,7 @@ module.exports = {
 
   output: {
     filename: 'bundle.js',
-    publicPath: path.resolve('public')
+    path: path.resolve('public')
   },
 
   devServer: {

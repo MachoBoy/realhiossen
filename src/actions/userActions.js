@@ -6,7 +6,8 @@ import {
   INPUT_ON_CHANGE,
   USER_PROFILE_FETCH_SUCCESS,
   ADD_SHIPPING_ADDRESS,
-  ADD_SHIPIING_ADDRESS_SUCCESS
+  ADD_SHIPIING_ADDRESS_SUCCESS,
+  FETCH_SHIPPING_ADDRESS_SUCCESS
 } from './types';
 
 export const inputOnChange = data => {
@@ -65,6 +66,20 @@ export const updateShippingAddress = ({
       })
       .then(() => {
         dispatch({ type: ADD_SHIPIING_ADDRESS_SUCCESS });
+      });
+  };
+};
+
+export const fetchUserAddressbook = () => {
+  const { currentUser } = auth;
+  return dispatch => {
+    database
+      .ref(`users/${currentUser.uid}/shippingAddress`)
+      .once('value', snapshot => {
+        dispatch({
+          type: FETCH_SHIPPING_ADDRESS_SUCCESS,
+          payload: snapshot.val()
+        });
       });
   };
 };

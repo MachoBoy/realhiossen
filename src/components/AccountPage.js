@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Segment, Icon, Header } from 'semantic-ui-react';
 import ProfileForm from './ProfileForm';
 import ShippingForm from './ShippingForm';
 import AddressBook from './AddressBook';
+import LoaderDimmer from './common/loaderDimmer';
 
 class AccountPage extends Component {
   render() {
@@ -18,13 +20,14 @@ class AccountPage extends Component {
           </Header>
         </Segment>
         <div className="profileContents" style={styles.profileContentsStyle}>
+          <LoaderDimmer active={this.props.userloading} />
           <div
             className="addressBookContainer"
             style={styles.addressBookContainerStyle}
           >
             <AddressBook />
           </div>
-          <div style={{ marginBottom: '15px', width: '60%' }}>
+          <div style={{ marginBottom: '15px', width: '60%', display: 'table' }}>
             <ProfileForm />
           </div>
 
@@ -47,4 +50,10 @@ const styles = {
   }
 };
 
-export default AccountPage;
+const mapStateToProps = state => {
+  return {
+    userloading: state.user.userloading
+  };
+};
+
+export default connect(mapStateToProps)(AccountPage);

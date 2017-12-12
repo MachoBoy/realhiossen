@@ -14,7 +14,7 @@ class Header extends Component {
           <div className="logo" style={styles.imageStyle}>
             <Image as={Link} to="/" src={require('../img/hiossenLogo.jpg')} />
           </div>
-          {this.props.authenticated ? (
+          {this.props.user ? (
             <div className="menuContainer" style={styles.menuContainer}>
               <SideMenu />
             </div>
@@ -24,7 +24,7 @@ class Header extends Component {
             </div>
           )}
 
-          {this.props.authenticated ? (
+          {this.props.user ? (
             <div style={styles.buttonStyle}>
               <Button color="red" onClick={this.props.logoutUser}>
                 Sign out
