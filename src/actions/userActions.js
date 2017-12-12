@@ -17,13 +17,18 @@ export const inputOnChange = data => {
   };
 };
 
-export const updateUserProfile = ({ firstName, lastName, phone }) => {
+export const updateUserProfile = ({
+  customerCode,
+  firstName,
+  lastName,
+  phone
+}) => {
   const { currentUser } = auth;
   return dispatch => {
     dispatch({ type: UPDATE_USER_PROFILE });
     database
       .ref(`users/${currentUser.uid}/profile`)
-      .set({ firstName, lastName, phone })
+      .set({ customerCode, firstName, lastName, phone })
       .then(() => {
         dispatch({ type: UPDATE_SUCCESS });
       });
@@ -75,7 +80,7 @@ export const fetchUserAddressbook = () => {
   return dispatch => {
     database
       .ref(`users/${currentUser.uid}/shippingAddress`)
-      .once('value', snapshot => {
+      .on('value', snapshot => {
         dispatch({
           type: FETCH_SHIPPING_ADDRESS_SUCCESS,
           payload: snapshot.val()

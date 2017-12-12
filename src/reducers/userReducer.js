@@ -9,21 +9,27 @@ import {
 } from '../actions/types';
 
 const INITIAL_STATE = {
+  // user profile state
+  userInfo: {},
   customerCode: '',
+  firstName: '',
+  lastName: '',
+  phone: '',
+  // shipping address state
   shippingFirstName: '',
   shippingLastName: '',
-  email: '',
-  phone: '',
   shippingAddress: '',
   companyName: '',
   city: '',
   state: '',
   postalCode: '',
   shippingPhone: '',
+  // shipping address book state
+  shippingAddressBook: {},
+  // loading
   userloading: false,
   profileSaved: false,
-  shippingAddressSaved: false,
-  shippingAddressBook: {}
+  shippingAddressSaved: false
 };
 
 export default function(state = INITIAL_STATE, action) {
@@ -37,15 +43,30 @@ export default function(state = INITIAL_STATE, action) {
     case UPDATE_USER_PROFILE:
       return { ...state, userloading: true };
     case USER_PROFILE_FETCH_SUCCESS:
-      return action.payload;
+      return { ...state, userInfo: action.payload };
     case ADD_SHIPPING_ADDRESS:
       return { ...state, userloading: true };
     case ADD_SHIPIING_ADDRESS_SUCCESS:
-      return { ...state, userloading: false, shippingAddressSaved: true };
+      return {
+        ...state,
+        userloading: false,
+        shippingAddressSaved: true,
+        shippingFirstName: '',
+        shippingLastName: '',
+        shippingAddress: '',
+        companyName: '',
+        city: '',
+        state: '',
+        postalCode: '',
+        shippingPhone: ''
+      };
     case UPDATE_SUCCESS:
       return { ...state, userloading: false, profileSaved: true };
     case FETCH_SHIPPING_ADDRESS_SUCCESS:
-      return { ...state, shippingAddressBook: action.payload };
+      return {
+        ...state,
+        shippingAddressBook: action.payload
+      };
     default:
       return state;
   }
