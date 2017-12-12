@@ -13,10 +13,9 @@ class ProfileForm extends Component {
     this.handleOnSubmit = this.handleOnSubmit.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
   }
-
-  // componentDidMount() {
-  //   this.props.fetchUserProfile();
-  // }
+  componentDidMount() {
+    this.props.fetchUserProfile();
+  }
 
   // submit the profile data
   handleOnSubmit(e) {
@@ -44,6 +43,7 @@ class ProfileForm extends Component {
   }
 
   render() {
+    console.log(this.props.userInfo);
     return (
       <div className="accountForm">
         <Segment raised style={{ paddingLeft: '30px' }}>
@@ -78,7 +78,7 @@ class ProfileForm extends Component {
               name="customerCode"
               label="Customer Code"
               readOnly
-              value={this.props.customerCode}
+              value={this.props.customerCode || ''}
               onChange={this.handleOnChange.bind(this)}
             />
             <Form.Group>
@@ -87,7 +87,7 @@ class ProfileForm extends Component {
                 name="firstName"
                 label="Fisrt Name"
                 readOnly={this.state.ableEdit}
-                value={this.props.firstName}
+                value={this.props.userInfo.firstName}
                 onChange={this.handleOnChange.bind(this)}
               />
 
@@ -96,7 +96,7 @@ class ProfileForm extends Component {
                 name="lastName"
                 label="Last Name"
                 readOnly={this.state.ableEdit}
-                value={this.props.lastName}
+                value={this.props.userInfo.lastName}
                 onChange={this.handleOnChange.bind(this)}
               />
             </Form.Group>
@@ -106,7 +106,7 @@ class ProfileForm extends Component {
               name="phone"
               label="Phone"
               readOnly={this.state.ableEdit}
-              value={this.props.phone}
+              value={this.props.userInfo.phone}
               onChange={this.handleOnChange.bind(this)}
             />
           </Form>
@@ -118,12 +118,8 @@ class ProfileForm extends Component {
 
 const mapStateToProps = state => {
   return {
-    customerCode: state.user.customerCode,
-    firstName: state.user.firstName,
-    lastName: state.user.lastName,
-    phone: state.user.phone,
-    userInfo: state.user,
-    profileSaved: state.user.profileSaved
+    profileSaved: state.user.profileSaved,
+    userInfo: state.user.userInfo
   };
 };
 

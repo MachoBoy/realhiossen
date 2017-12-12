@@ -77,7 +77,7 @@ class ShippingForm extends Component {
                 width={6}
                 name="shippingFirstName"
                 label="Fisrt Name"
-                value={this.props.shippingFirstName}
+                value={this.props.shippingFirstName || ''}
                 onChange={this.handleOnChange.bind(this)}
               />
 

@@ -6,6 +6,7 @@ import AccountPage from './AccountPage';
 import Header from './Header';
 import OrderPage from './OrderPage';
 import ContactPage from './ContactPage';
+import Footer from './Footer';
 import { getUser } from '../actions';
 
 class App extends Component {
@@ -20,8 +21,6 @@ class App extends Component {
     } else {
       console.log('user is not there');
     }
-
-    const Contact = () => <div>Contact page</div>;
     return (
       <div className="App">
         <BrowserRouter>
@@ -31,6 +30,7 @@ class App extends Component {
             <Route exact path="/account" component={AccountPage} />
             <Route exact path="/order" component={OrderPage} />
             <Route exact path="/contact" component={ContactPage} />
+            <Footer />
           </div>
         </BrowserRouter>
       </div>
@@ -45,4 +45,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { getUser })(App);
+export default connect(mapStateToProps, {
+  getUser
+})(App);

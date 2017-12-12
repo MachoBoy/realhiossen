@@ -52,7 +52,8 @@ const styles = {
 
 const mapStateToProps = state => {
   return {
-    userloading: state.user.userloading
+    userloading: state.user.userloading,
+    user: state.auth.user
   };
 };
 
