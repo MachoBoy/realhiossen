@@ -1,3 +1,4 @@
+import 'react-hot-loader/patch';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
@@ -9,7 +10,10 @@ import App from './components/App';
 import reducers from './reducers';
 import registerServiceWorker from './registerServiceWorker';
 
-const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
+const reduxDevTool =
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+const store = createStore(reducers, reduxDevTool, applyMiddleware(reduxThunk));
+const rootElement = document.getElementById('root');
 const render = Component => {
   ReactDOM.render(
     <AppContainer>
@@ -17,7 +21,7 @@ const render = Component => {
         <App />
       </Provider>
     </AppContainer>,
-    document.getElementById('root')
+    rootElement
   );
 };
 registerServiceWorker();
@@ -27,7 +31,7 @@ render(App);
 // Webpack Hot Module Replacement API
 if (module.hot) {
   module.hot.accept('./components/App', () => {
-    console.log('hot!!!');
     render(App);
+    console.log('hot loading!!!');
   });
 }
