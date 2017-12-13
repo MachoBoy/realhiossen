@@ -1,23 +1,39 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Segment, Header, Card } from 'semantic-ui-react';
-import { fetchUserAddressbook } from '../actions';
+import { Segment, Header, Card, Button } from 'semantic-ui-react';
+import { fetchUserAddressbook, deleteShippingAddress } from '../actions';
 import shortid from 'shortid';
 
 class AddressBook extends Component {
+  constructor(props) {
+    super(props);
+  }
   componentDidMount() {
     this.props.fetchUserAddressbook();
+  }
+
+  handleRemove(addressKey) {
+    console.log(addressKey);
+    this.props.deleteShippingAddress(addressKey);
   }
 
   renderAddressCard() {
     const shippingAddresses = _.map(
       this.props.shippingAddressBook,
-      (value, uid) => {
+      (value, addressKey) => {
         return (
           <Card raised link key={shortid.generate()}>
             <Card.Content>
+              <Button
+                basic
+                style={{ float: 'right' }}
+                icon="cancel"
+                size="mini"
+                onClick={() => this.handleRemove(addressKey)}
+              />
               <Card.Header>{value.companyName}</Card.Header>
+
               <Card.Meta>
                 {value.shippingFirstName}
                 {value.shippingLastName}
@@ -36,7 +52,6 @@ class AddressBook extends Component {
   }
 
   render() {
-    console.log(this.props.shippingAddressBook);
     return (
       <div>
         <Segment>
@@ -55,15 +70,12 @@ class AddressBook extends Component {
 
 const mapStateToProps = state => {
   return {
-    shippingAddressBook: state.user.shippingAddressBook
+    shippingAddressBook: state.user.shippingAddressBook,
+    user: state.auth.user
   };
-  // const shippingAddressBook = _.map(
-  //   state.user.shippingAddressBook,
-  //   ({ val, uid }) => {
-  //     return { ...val, uid };
-  //   }
-  // );
-  // return { shippingAddressBook };
 };
 
-export default connect(mapStateToProps, { fetchUserAddressbook })(AddressBook);
+export default connect(mapStateToProps, {
+  fetchUserAddressbook,
+  deleteShippingAddress
+})(AddressBook);

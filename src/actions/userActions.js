@@ -88,3 +88,10 @@ export const fetchUserAddressbook = () => {
       });
   };
 };
+
+export const deleteShippingAddress = key => {
+  const { currentUser } = auth;
+  return dispatch => {
+    database.ref(`users/${currentUser.uid}/shippingAddress/${key}`).remove();
+  };
+};

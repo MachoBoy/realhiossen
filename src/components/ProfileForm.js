@@ -43,7 +43,6 @@ class ProfileForm extends Component {
   }
 
   render() {
-    console.log(this.props.userInfo);
     return (
       <div className="accountForm">
         <Segment raised style={{ paddingLeft: '30px' }}>
@@ -78,7 +77,7 @@ class ProfileForm extends Component {
               name="customerCode"
               label="Customer Code"
               readOnly
-              value={this.props.customerCode || ''}
+              value={this.props.userInfo.customerCode}
               onChange={this.handleOnChange.bind(this)}
             />
             <Form.Group>
